@@ -1,113 +1,93 @@
-// -------------------- ARRAY CREATION -------------------- //
-let arr = [10, 20, 30, 40, 50];
-console.log(arr);  
-// 👉 [10, 20, 30, 40, 50]
+// -------------------- ARRAY CHEAT SHEET -------------------- //
+// Covers: creation, methods, slice vs splice, prototype, shallow vs deep copy, spread
 
 
-// -------------------- COMMON ARRAY METHODS -------------------- //
+// -------------------- 1. ARRAY CREATION -------------------- //
+let fruits = ["apple", "banana", "mango"];  // simple array
+let scores = new Array(10, 20, 30);         // using Array constructor
+let emptyArr = [];                          // empty array
 
-// Length of array
-console.log(arr.length);   // 👉 5
-
-// Accessing elements
-console.log(arr[0]);       // 👉 10
-console.log(arr[arr.length - 1]); // 👉 50
+console.log(fruits, scores, emptyArr);
 
 
-// -------------------- ADD/REMOVE ELEMENTS -------------------- //
-arr.push(60);       // Add to end
-console.log(arr);   // 👉 [10, 20, 30, 40, 50, 60]
+// -------------------- 2. COMMON ARRAY METHODS -------------------- //
+// push() → add at end
+fruits.push("grapes");
+console.log(fruits);  // 👉 ["apple", "banana", "mango", "grapes"]
 
-arr.pop();          // Remove from end
-console.log(arr);   // 👉 [10, 20, 30, 40, 50]
+// pop() → remove from end
+fruits.pop();
+console.log(fruits);  // 👉 ["apple", "banana", "mango"]
 
-arr.unshift(5);     // Add to beginning
-console.log(arr);   // 👉 [5, 10, 20, 30, 40, 50]
+// unshift() → add at start
+fruits.unshift("orange");
+console.log(fruits);  // 👉 ["orange", "apple", "banana", "mango"]
 
-arr.shift();        // Remove from beginning
-console.log(arr);   // 👉 [10, 20, 30, 40, 50]
+// shift() → remove from start
+fruits.shift();
+console.log(fruits);  // 👉 ["apple", "banana", "mango"]
 
+// includes()
+console.log(fruits.includes("banana"));  // 👉 true
 
-// -------------------- SEARCHING -------------------- //
-console.log(arr.indexOf(30));   // 👉 2
-console.log(arr.includes(40));  // 👉 true
+// indexOf()
+console.log(fruits.indexOf("mango"));    // 👉 2
 
-
-// -------------------- SLICING & SPLICING -------------------- //
-console.log(arr.slice(1, 3));   // 👉 [20, 30]  (non-destructive)
-
-arr.splice(2, 1, 99);           // Remove 1 element at index 2, insert 99
-console.log(arr);               // 👉 [10, 20, 99, 40, 50]
-
-
-// -------------------- ITERATION METHODS -------------------- //
-arr.forEach((num) => console.log(num * 2));  
-// 👉 20, 40, 198, 80, 100
-
-let squared = arr.map(num => num ** 2);
-console.log(squared);  
-// 👉 [100, 400, 9801, 1600, 2500]
-
-let evens = arr.filter(num => num % 2 === 0);
-console.log(evens);  
-// 👉 [10, 20, 40, 50]
-
-let sum = arr.reduce((acc, curr) => acc + curr, 0);
-console.log(sum);  
-// 👉 219
-
-console.log(arr.some(num => num > 100));  // 👉 true
-console.log(arr.every(num => num > 0));   // 👉 true
+// join()
+console.log(fruits.join("-"));           // 👉 "apple-banana-mango"
 
 
-// -------------------- JOINING & CONVERTING -------------------- //
-console.log(arr.join("-"));  
-// 👉 "10-20-99-40-50"
+// -------------------- 3. SLICE vs SPLICE -------------------- //
+// slice(start, end) → returns shallow copy, does NOT change original
+let testScores = [10, 20, 30, 40, 50];
+let slicedScores = testScores.slice(1, 4);  
+console.log(slicedScores);   // 👉 [20, 30, 40]
+console.log(testScores);     // 👉 [10, 20, 30, 40, 50] (unchanged)
 
-console.log("Split Example".split(" "));  
-// 👉 ["Split", "Example"]
-
-
-// -------------------- SORTING & REVERSING -------------------- //
-let nums = [4, 2, 10, 1, 5];
-nums.sort((a, b) => a - b);   // Ascending
-console.log(nums);            // 👉 [1, 2, 4, 5, 10]
-
-nums.reverse();               // Reverse order
-console.log(nums);            // 👉 [10, 5, 4, 2, 1]
+// splice(start, deleteCount, items...) → changes original
+let splicedScores = testScores.splice(1, 2, 99, 100);
+console.log(splicedScores);  // 👉 [20, 30] (removed)
+console.log(testScores);     // 👉 [10, 99, 100, 40, 50] (modified)
 
 
-// -------------------- FLATTENING -------------------- //
-let nested = [1, [2, [3, [4]]]];
-console.log(nested.flat(1));   // 👉 [1, 2, [3, [4]]]
-console.log(nested.flat(2));   // 👉 [1, 2, 3, [4]]
-console.log(nested.flat(Infinity)); // 👉 [1, 2, 3, 4]
+// -------------------- 4. PROTOTYPE OF ARRAY -------------------- //
+Array.prototype.first = function () {
+  return this[0];
+};
+
+Array.prototype.last = function () {
+  return this[this.length - 1];
+};
+
+let marks = [5, 10, 15, 20];
+console.log(marks.first());  // 👉 5
+console.log(marks.last());   // 👉 20
 
 
-// -------------------- SHALLOW COPY -------------------- //
-// Shallow copy = only top-level elements copied, nested objects still linked
+// -------------------- 5. SPREAD OPERATOR -------------------- //
+// expands array/object into elements
 
-let shallow1 = arr.slice();    // Method 1
-let shallow2 = [...arr];       // Method 2 (spread operator)
+let moreScores = [0, ...marks, 25];
+console.log(moreScores);  
+// 👉 [0, 5, 10, 15, 20, 25]
 
-shallow1[0] = 999;
-console.log(arr[0]);      // 👉 Still 10 (not affected)
+// copy (shallow)
+let copyScores = [...marks];
+console.log(copyScores);  
+// 👉 [5, 10, 15, 20]
 
-// But if array has objects:
-let objArr = [{a:1}, {b:2}];
-let shallowCopy = [...objArr];
-shallowCopy[0].a = 100;
-console.log(objArr[0].a);   // 👉 100 (linked!)
 
-// -------------------- DEEP COPY -------------------- //
-// Deep copy = nested objects are also cloned (no link)
+// -------------------- 6. SHALLOW vs DEEP COPY -------------------- //
+// shallow copy (spread)
+let players = [{ name: "A" }, { name: "B" }];
+let shallowCopy = [...players];
 
-// Method 1: JSON trick (works only with JSON-safe data)
-let deepCopy1 = JSON.parse(JSON.stringify(objArr));
-deepCopy1[0].a = 200;
-console.log(objArr[0].a);   // 👉 100 (original unaffected)
+shallowCopy[0].name = "Changed";
+console.log(players[0].name);  
+// 👉 "Changed" (reference copied)
 
-// Method 2: structuredClone (modern JS, safer)
-let deepCopy2 = structuredClone(objArr);
-deepCopy2[1].b = 300;
-console.log(objArr[1].b);   // 👉 2 (original unaffected)
+// deep copy
+let deepCopy = JSON.parse(JSON.stringify(players));
+deepCopy[0].name = "Restored";
+console.log(players[0].name);  
+// 👉 "Changed" (deep copy is independent now)
