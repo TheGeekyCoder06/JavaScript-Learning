@@ -20,6 +20,7 @@ console.log(typeof value);
 console.log(value);  
 // 👉 Output: NaN (special type of number that means invalid number)
 
+
 // -------------------- BOOLEAN CONVERSION RULES -------------------- //
 // Any value in JS can be converted to a boolean (true/false)
 
@@ -119,3 +120,38 @@ Truthy Values (always true):
 5. Functions
 6. Infinity and -Infinity
 */
+
+
+// -------------------- DATA TYPES IN JAVASCRIPT -------------------- //
+
+// 👉 JavaScript data types are divided into two categories:
+
+// 1. Primitive Data Types (immutable, stored by value)
+let num = 42;              // Number
+let bigIntNum = 12345678901234567890n; // BigInt
+let str = "Hello JS";      // String
+let bool = true;           // Boolean
+let empty = null;          // Null
+let notDefined;            // Undefined
+let sym = Symbol("id");    // Symbol (unique identifier)
+
+// Check types
+console.log(typeof num);        // number
+console.log(typeof bigIntNum);  // bigint
+console.log(typeof str);        // string
+console.log(typeof bool);       // boolean
+console.log(typeof empty);      // object (special case in JS)
+console.log(typeof notDefined); // undefined
+console.log(typeof sym);        // symbol
+
+
+// 2. Non-Primitive Data Types (mutable, stored by reference)
+let obj = { name: "Harshith", age: 19 }; // Object
+let arr = [1, 2, 3, 4];                  // Array
+let func = function() { return "Hello"; }; // Function
+let date = new Date();                   // Date object
+
+console.log(typeof obj);   // object
+console.log(typeof arr);   // object (arrays are objects internally)
+console.log(typeof func);  // function
+console.log(typeof date);  // object

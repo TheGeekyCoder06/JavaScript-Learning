@@ -1,0 +1,97 @@
+JavaScript Memory Management: Stack vs Heap
+=================================================
+
+1. Stack Memory in JavaScript
+-----------------------------
+- Stack is used to store **primitive data types** and **function execution context**.
+- Primitive types in JS:
+  Number, String, Boolean, null, undefined, Symbol, BigInt.
+
+👉 Stored directly by value in the stack.
+👉 When you assign or copy a primitive, JS makes a copy of the value.
+
+Example:
+---------
+let x = 10;  // stored in stack
+let y = x;   // copy of 10, stored separately
+
+y = 20;
+
+console.log(x); // 10
+console.log(y); // 20
+
+✅ Changing 'y' doesn’t affect 'x', because primitives are copied by value.
+
+
+2. Heap Memory in JavaScript
+-----------------------------
+- Heap is used to store **non-primitive (reference) types**:
+  Objects, Arrays, Functions.
+
+👉 The reference (pointer) is stored in the stack.
+👉 The actual object/array/function lives in the heap.
+
+Example:
+---------
+let obj1 = { name: "Harshith" };  // object stored in heap
+let obj2 = obj1;  // stack stores reference to heap
+
+obj2.name = "GeekyCoder";
+
+console.log(obj1.name); // "GeekyCoder"
+console.log(obj2.name); // "GeekyCoder"
+
+✅ Both 'obj1' and 'obj2' point to the same object in heap.
+
+
+3. Call Stack (Execution Stack)
+-------------------------------
+- Each time you call a function, a new frame is added to the call stack.
+- When the function finishes, the frame is removed (popped).
+
+Example:
+---------
+function first() {
+  console.log("First");
+  second();
+}
+
+function second() {
+  console.log("Second");
+}
+
+first();
+
+Execution Order in Call Stack:
+1. main() (global execution context)
+2. first() pushed
+3. second() pushed
+4. second() pops after finishing
+5. first() pops
+6. global context pops at end
+
+
+4. Garbage Collection in JavaScript
+-----------------------------------
+- JavaScript automatically cleans up unused heap memory (objects with no references).
+
+Example:
+---------
+let obj = { name: "Harshith" };
+obj = null; // old object becomes unreachable → GC will clean it
+
+
+5. Quick Comparison Table
+--------------------------
+| Feature          | Stack (Primitive)             | Heap (Reference)             |
+|------------------|-------------------------------|-------------------------------|
+| Data type        | Number, String, Boolean, etc. | Object, Array, Function       |
+| Storage          | Actual value                  | Reference in stack + object in heap |
+| Copy behavior    | Copy by value                 | Copy by reference             |
+| Lifetime         | Function/global scope         | Until no reference → GC       |
+
+
+Summary:
+---------
+- Primitives → Stack → Copy by value
+- Objects/Arrays/Functions → Heap → Copy by reference
