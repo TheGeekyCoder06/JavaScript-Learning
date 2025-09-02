@@ -1,35 +1,54 @@
 "use strict";
 
-// ============================================================
-// 🚀 ARRAY ITERATION METHODS (map, filter, reduce)
-// ============================================================
+/**
+ * ============================================================
+ *  innerText vs textContent vs innerHTML in JavaScript
+ * ============================================================
+ *
+ * 1. innerText
+ *    - Returns ONLY the visible text (respects CSS).
+ *    - Ignores hidden text (e.g., display:none, visibility:hidden).
+ *    - Triggers reflow (slower).
+ *
+ * 2. textContent
+ *    - Returns ALL text inside the element (ignores CSS visibility).
+ *    - Does NOT include HTML tags (raw text only).
+ *    - Faster (does not trigger reflow).
+ *
+ * 3. innerHTML
+ *    - Returns the full markup + text inside the element.
+ *    - Includes HTML tags.
+ *    - Can set/insert HTML dynamically (⚠️ risk of XSS if user input is used).
+ *
+ * ------------------------------------------------------------
+ * Example Setup (HTML):
+ *
+ * <div id="demo">
+ *   Hello <b>World</b>
+ *   <span style="display:none">Hidden</span>
+ * </div>
+ * ------------------------------------------------------------
+ */
+
+const demo = document.getElementById("demo");
 
 // =======================
-// 1. MAP
+// innerText
 // =======================
-// Applies a function to each element & returns a NEW array
-let prices = [100, 200, 300];
-let discounted = prices.map(price => price * 0.9);
-
-console.log("Original Prices:", prices);       // 👉 [100, 200, 300]
-console.log("Discounted Prices:", discounted); // 👉 [90, 180, 270]
+console.log("innerText:", demo.innerText);
+// 👉 Output: "Hello World"
+// (ignores <span> because it's hidden with display:none)
 
 // =======================
-// 2. FILTER
+// textContent
 // =======================
-// Returns a NEW array with elements that match a condition
-let ages = [12, 18, 22, 15, 30];
-let adults = ages.filter(age => age >= 18);
-
-console.log("All Ages:", ages);   // 👉 [12, 18, 22, 15, 30]
-console.log("Adults:", adults);   // 👉 [18, 22, 30]
+console.log("textContent:", demo.textContent);
+// 👉 Output: "Hello World Hidden"
+// (includes hidden text, ignores styling)
 
 // =======================
-// 3. REDUCE
+// innerHTML
 // =======================
-// Reduces array to a single value (sum, product, etc.)
-let numbers = [10, 20, 30, 40];
-let total = numbers.reduce((acc, curr) => acc + curr, 0);
-
-console.log("Numbers:", numbers); // 👉 [10, 20, 30, 40]
-console.log("Sum:", total);       // 👉 100
+console.log("innerHTML:", demo.innerHTML);
+// 👉 Output: "Hello <b>World</b>\n  <span style="display:none">Hidden</span>"
+// (includes tags + text)

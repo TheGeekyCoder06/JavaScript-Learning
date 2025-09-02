@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: #010101;
+        color: aliceblue;
+    }
+</style>
+<body>
+    <div id="demo">
+        Hello <b>World</b>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    <span style="display:none">Hidden</span>
+    </div>
+        <script>
+"use strict";
+
+// ============================================================
+// 🚀 DOM MANIPULATION EXAMPLES
+// ============================================================
+
+// -------------------- SELECTING ELEMENTS -------------------- //
+
+// Get element by ID
+let demoDiv = document.getElementById("demo");
+console.log(demoDiv);  
+// 👉 Returns the whole <div id="demo">...</div>
+
+// Query selectors (modern way)
+// Selects the first <ul> inside #demo
+let demoList = document.querySelector("#demo ul");
+console.log(demoList);
+
+// Select all <li> elements (NodeList, iterable like an array)
+let listItems = document.querySelectorAll("#demo li");
+console.log(listItems);
+
+
+// -------------------- ACCESSING CONTENT -------------------- //
+
+// innerText → visible text only (ignores hidden elements, respects CSS)
+console.log("innerText:", demoDiv.innerText);
+
+// textContent → all text (including hidden or collapsed text, no formatting)
+console.log("textContent:", demoDiv.textContent);
+
+// innerHTML → HTML markup inside the element
+console.log("innerHTML:", demoDiv.innerHTML);
+
+
+// -------------------- MODIFYING CONTENT -------------------- //
+
+// Change text
+demoDiv.querySelector("b").innerText = "Universe";  
+// 👉 Changes "Hello World" → "Hello Universe"
+
+// Change HTML
+demoDiv.querySelector("ul").innerHTML = `
+    <li>Apple</li>
+    <li>Mango</li>
+    <li>Banana</li>
+`;  
+// 👉 Replaces old <li> list with new fruit list
+
+
+// -------------------- CREATING & APPENDING -------------------- //
+
+// Create a new element
+let newItem = document.createElement("li");
+newItem.innerText = "Grapes";  
+
+// Append to list
+demoList.appendChild(newItem);  
+// 👉 Adds <li>Grapes</li> at the end of <ul>
+
+
+// -------------------- STYLING WITH JS -------------------- //
+demoDiv.style.border = "2px solid cyan";  
+demoDiv.style.padding = "10px";
+demoDiv.style.borderRadius = "8px";
+// 👉 Inline styles applied directly to the element
+
+
+// -------------------- EVENT HANDLING -------------------- //
+// Example: clicking the div changes background color
+demoDiv.addEventListener("click", function () {
+    document.body.style.backgroundColor = 
+        document.body.style.backgroundColor === "black" ? "#222" : "black";
+});
+
+</script>
+
+
+</body>
+</html>

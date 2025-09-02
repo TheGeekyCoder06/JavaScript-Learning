@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background: #212121;
+  padding: 15px;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.canvas {
+  margin-top: 50px;
+}
+
+.button {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #212121;
+}
+
+#grey {
+  background: grey;
+}
+
+#white {
+  background: white;
+  border: 2px solid #ccc;
+}
+
+#blue {
+  background: blue;
+}
+
+#yellow {
+  background: yellow;
+}
